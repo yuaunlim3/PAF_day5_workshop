@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <header>List of Order</header>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Order Date</th>
+                    <th>Customer Name</th>
+                    <th>Shipping Address</th>
+                    <th>Notes</th>
+                    <th>Tax</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="order : ${orderList}">
+                    <td th:text="${order.order_id}"></td>
+                    <td th:text="${order.order_date}"></td>
+                    <td th:text="${order.customer_name}"></td>
+                    <td th:text="${order.ship_address}"></td>
+                    <td th:text="${order.notes}"></td>
+                    <td th:text="${order.tax}"></td>
+                    <td><a th:href="@{/orderInfo/{order_id}(order_id=${order.order_id})}">GET</a></td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <a href="/order">Add more orders</a>
+                    </td>
+                </tr>
+            </tbody>
+    </div>
+</body>
+</html>

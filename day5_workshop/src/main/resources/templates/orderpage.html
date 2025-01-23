@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+</head>
+<body>
+    <div data-th-if="${orderInfo != null}">
+        <form action="/order" method="POST">
+            <input type="hidden" name = "name" data-th-value="${name}">
+            <table>
+                <div>Add order details for <span data-th-text="${name}"></span></div>
+                <div>
+                    <tr>
+                        <td>Product: </td>
+                        <td>
+                            <input type="text" name="product">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Unit price </td>
+                        <td>
+                            <input type="text" name="unit_price">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Discount </td>
+                        <td>
+                            <input type="text" name="discount">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Quantity</td>
+                        <td>
+                            <input type="text" name="quantity">
+                        </td>
+                    </tr>
+                </div>
+                <br><br>
+            </table>
+            <button type="submit">Add</button>
+        </form>
+    </div>
+    
+    <div  data-th-if="${orderInfo == null}">
+        <form action="/addDetails" method="POST">
+            <table>
+                <div><span>Add customer info:</span></div>
+                <tr>
+                    <td>Order Date: </td>
+                    <td>
+                        <input type="date" name="order_date">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Customer Name: </td>
+                    <td>
+                        <select name="customer_name">
+                            <option value="" disabled selected>Select a Customer</option>
+                            <th:block th:each="customer : ${customerNames}">
+                                <option th:value="${customer}" th:text="${customer}"></option>
+                            </th:block>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ship Address: </td>
+                    <td>
+                        <input type="text" name="ship_address">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tax:</td>
+                    <td>
+                        <input type="text" name="tax">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Notes: </td>
+                    <td>
+                        <textarea name="notes"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit"> Add details</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <br><a href="/"> Back</a>
+    <br>
+    <div>
+        <header>List of details</header>
+        <table>
+            <thead >
+                <tr>
+                    <th>ID</th>
+                    <th>Order ID</th>
+                    <th>Product</th>
+                    <th>Unit Price</th>
+                    <th>Discount</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="detail,iterStat: ${orderList}">
+                    <td data-th-text="${iterStat.index + 1}"></td>
+                    <td th:text="${detail.order_id}"></td>
+                    <td th:text="${detail.product}"></td>
+                    <td th:text="${detail.unit_price}"></td>
+                    <td th:text="${detail.discount}"></td>
+                    <td th:text="${detail.quantity}"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <form action="/submit" method="POST">
+                            <input type="hidden" name = "name" data-th-value="${name}">
+                            <button type="submit">Done</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+
+    </div>
+
+</body>
+</html>

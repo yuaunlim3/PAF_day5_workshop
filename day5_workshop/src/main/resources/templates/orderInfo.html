@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <header>List of details</header>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Order ID</th>
+                    <th>Product</th>
+                    <th>Unit Price</th>
+                    <th>Discount</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="detail : ${detailsList}">
+                    <td th:text="${detail.id}"></td>
+                    <td th:text="${detail.order_id}"></td>
+                    <td th:text="${detail.product}"></td>
+                    <td th:text="${detail.unit_price}"></td>
+                    <td th:text="${detail.discount}"></td>
+                    <td th:text="${detail.quantity}"></td>
+                </tr>
+            </tbody>
+            <br>
+            <tr>
+                <td><a href="/">Back</a></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
